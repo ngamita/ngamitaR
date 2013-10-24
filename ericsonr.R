@@ -17,6 +17,7 @@
 ## *** Defaults *** 
 directory <- "/home/ngamita/refunite/R/data"
 
+
 ## 1. Dump all Mysql stats (Format: )
 ## 2. Dump all Mongo stats (Format: )
 
@@ -27,10 +28,22 @@ file <- paste('rusql', "csv", sep=".")
 path_sql <- paste(directory, file, sep="/")
 #print(path_sql)
 # Fix warning --> set quote = ""
-add_sql <- read.csv(path_sql, header=F, sep=',', quote = "", 
+add_sql <- read.csv(path_sql, header=F, sep=',', quote = "",
 										row.names = NULL, 
-										stringsAsFactors = FALSE) # load sql dump, Df called add_sql
-head(add_sql)
+										na.strings = c("", "\\N")) # load sql dump, Df called add_sql
+
+# Fix the date readability/ column names. 
+
+names(add_sql) <- c('id', 'createDate', 'owningMonitorProfile_id', 'owningPartner_id')
+
+## Omit the NAs
+## na.omit(add_sql$createDate)
+
+## Fix the dates readability (Char - as.Date conversion)
+add_sql$createDate <- as.Date(as.character(add_sql$createDate,  format="%Y-%m-%d"))
+
+
+head(add_sql$createDate)
 
 ## Move to /dir load rumongo.csv
 
