@@ -40,7 +40,7 @@ names(add_sql) <- c('id', 'createDate', 'owningMonitorProfile_id', 'owningPartne
 ## na.omit(add_sql$createDate)
 
 ## Fix the dates readability (Char - as.Date conversion)
-add_sql$createDate <- as.Date(as.character(add_sql$createDate,  format="%Y-%m-%d"))
+add_sql$createDate <- as.Date(add_sql$createDate,  format="%Y-%m-%d")
 
 
 head(add_sql$createDate)
