@@ -63,7 +63,7 @@ names(aggregate_df) <- c('ids', 'count')
 
 sms_threads <- aggregate_df[aggregate_df$ids %in% threads_df$directions.ids, ]
 ## randomly clean out all those with more than 20 messages FYI- just an estimate.
-clean_spam_df <- sms_threads[sms_threads$count > 20, ]
+clean_spam_df <- sms_threads[sms_threads$count <= 20, ]
 ## total SMS exchanged in system.
 sum(sms_threads$count)
 
@@ -77,3 +77,10 @@ sum(sms_threads$count)
 phone_threads <- train_set[train_set$thread_id %in% threads_df$directions.ids, ]
 
 got_phone <- phone_threads[grep("(\\(?(\\d{3})\\)?\\s?-?\\s?(\\d{3})\\s?-?\\s?(\\d{3}))", phone_threads$messageBody),] 
+got_email <- phone_threads[grep("([a-z0-9_\\.-]+)@([\\da-z\\.-]+)\\.([a-z\\.]{2,6})", phone_threads$messageBody),] 
+
+
+## cleaned too 
+clean_phone_df <- clean_spam_df[clean_spam_df$ids %in% got_phone$thread_id, ]
+clean_email_df <- clean_spam_df[clean_spam_df$ids %in% got_email$thread_id, ]
+nrow(clean_phone_df)
