@@ -1,6 +1,11 @@
 # Function to read through dataframe
 # Spit out csv's per column level (Musician, name)
 
+# To run the code
+# 1. Make sure you have the raw data file (x) in the currentl directory
+# 2. run the function above, followed by the code below (choose 1 or 2 depending on which)\
+# data sheet of you want to user (1 = Gospel and 2= Secular)
+
 # __Author__ "ngamita@gmail.com"
 # install the Excel reading packages. 
 install.packages("xlsx", type = "source")
@@ -38,8 +43,5 @@ dump_df <- function(x, t){
     
 }
 
-# To the the code
-# 1. Make sure you have the raw data file (x) in the currentl directory
-# 2. run the function above, followed by the code below (choose 1 or 2 depending on which)\
-# data sheet of you want to user (1 = Gospel and 2= Secular)
+
 dump_df("Songs for safaricom-01.xlsx", 2)
